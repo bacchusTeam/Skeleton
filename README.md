@@ -1,9 +1,6 @@
-# Spring 5 에 대해 알아보자
+# Skeleton
 
-Sample 은 아래 2곳 만을 참조 해서 사용하자
-
-- [Spring Framework Guide](https://spring.io/guides)
-- [Spring Boot Sample](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
+Project 시작전  참조를 위한 
 
 ## 1. spring-boot-skeleton
 
