@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    schema: classpath:import.sql
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+application:
+  message: Hello Phil
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+
+logging:
+  level:
+    root: WARN
+    sample:
+      mybatis:
+        mapper: TRACE
