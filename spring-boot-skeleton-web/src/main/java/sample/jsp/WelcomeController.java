@@ -19,24 +19,18 @@ package sample.jsp;
 import java.util.Date;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import sample.mybatis.dao.CityDao;
 import sample.mybatis.mapper.HotelMapper;
 
+@Slf4j
 @Controller
 public class WelcomeController {
-
-  public WelcomeController(CityDao cityDao, HotelMapper hotelMapper) {
-    this.cityDao = cityDao;
-    this.hotelMapper = hotelMapper;
-  }
-
-  private final CityDao cityDao;
-
-  private final HotelMapper hotelMapper;
 
   @Value("${application.message:Hello World}")
   private String message = "Hello World";
@@ -51,8 +45,6 @@ public class WelcomeController {
 
   @RequestMapping("/foo")
   public String foo(Map<String, Object> model) {
-    System.out.println(this.cityDao.selectCityById(1));
-    System.out.println(this.hotelMapper.selectByCityId(1));
     throw new RuntimeException("Foo");
   }
 
