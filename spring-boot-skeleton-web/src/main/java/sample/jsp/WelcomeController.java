@@ -39,12 +39,13 @@ public class WelcomeController {
   public String welcome(Map<String, Object> model) {
     model.put("time", new Date());
     model.put("message", this.message);
-
+    log.info("welcome");
     return "welcome";
   }
 
   @RequestMapping("/foo")
   public String foo(Map<String, Object> model) {
+    log.error("foo");
     throw new RuntimeException("Foo");
   }
 

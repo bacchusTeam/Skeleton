@@ -16,21 +16,25 @@
 
 package sample;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
+@Slf4j
 public class SampleWebJspApplication extends SpringBootServletInitializer {
 
   public static void main(String[] args) {
+    log.info("before");
     SpringApplication.run(SampleWebJspApplication.class, args);
+    log.info("after");
   }
 
-  @Override
-  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-    return application.sources(SampleWebJspApplication.class);
-  }
+//  @Override
+//  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//    return application.sources(SampleWebJspApplication.class);
+//  }
 
 }
