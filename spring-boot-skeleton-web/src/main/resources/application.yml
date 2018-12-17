@@ -1,20 +1,56 @@
 spring:
+  application:
+    name: spring-boot-skeleton-web
   datasource:
-    schema: classpath:import.sql
+    platform: all
+    schema: classpath:import.sql # h2 일때는 가능 하지만 mariadb 일 때는 적용 안됨
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 10000
+      minimum-idle: 5
+      maximum-pool-size: 10
+      max-lifetime: 3597000
+      pool-name: datasource-skeleton-boot-web
+#      DB 변경시 log4jdbc.log4j2.properties 도 log4jdbc.drivers 변경이 필요함
+#      username: ${user}
+#      password: ${password}
+#      jdbc-url: jdbc:log4jdbc:mariadb://${host}:3306/crom
+      jdbc-url: jdbc:log4jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      data-source-properties:
+        cache-prep-stmts: "true"
+        prep-stmt-cache-size: "250"
+        prep-stmt-cache-sql-limit: "2048"
+        use-server-prep-stmts: "true"
+        use-local-session-state: "true"
+        rewrite-batched-statements: "true"
+        cache-result-set-metadata: "true"
+        cache-server-configuration: "true"
+        elide-set-auto-commits: "true"
+        maintain-time-stats: "false"
+  devtools:
+    restart:
+      enabled: true
   mvc:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 application:
   message: Hello Phil
+
+jasypt:
+  encryptor:
+    password: security-key-181218
 
 mybatis:
   config-location: classpath:mybatis-config.xml
 
 logging:
-  level:
-    root: WARN
-    sample:
-      mybatis:
-        mapper: TRACE
+  path: ./log
+  pattern:
+    console: '%-24.24d [%5p] %50.50C (%file:%line\) - %m%n'
