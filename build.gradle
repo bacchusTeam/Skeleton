@@ -10,7 +10,6 @@ subprojects {
     }
   }
 
-
   repositories {
     jcenter()
   }

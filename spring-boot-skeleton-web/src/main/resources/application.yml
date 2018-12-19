@@ -3,7 +3,10 @@ spring:
     name: spring-boot-skeleton-web
   datasource:
     platform: all
-    schema: classpath:import.sql # h2 일때는 가능 하지만 mariadb 일 때는 적용 안됨
+#    schema
+#    1. h2 일때는 동작함 하지만 mariadb 일 때는 동작 안함
+#    2. flyway 사용시에는 동시 사용불가능
+#    schema: classpath:import.sql
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       connection-timeout: 10000
@@ -39,6 +42,16 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 application:
   message: Hello Phil

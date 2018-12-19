@@ -1,30 +1,54 @@
 apply plugin: "java"
 apply plugin: "eclipse"
 apply plugin: "idea"
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
 apply plugin: "org.springframework.boot"
 apply plugin: "io.spring.dependency-management"
 
 group = "com.zzizily.skeleton.spring.boot"
 version = "0.0.1-SNAPSHOT"
 
+task initSourceFolders {
+  sourceSets*.java.srcDirs*.each {
+    if( !it.exists() ) {
+      it.mkdirs()
+    }
+  }
+
+  sourceSets*.resources.srcDirs*.each {
+    if( !it.exists() ) {
+      it.mkdirs()
+    }
+  }
+}
+
 dependencies {
 
   // Spring Boot
   implementation("org.springframework.boot:spring-boot-starter-web")
-  implementation("org.springframework.boot:spring-boot-devtools")
+  implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+  implementation("org.springframework.boot:spring-boot-starter-actuator")
+  runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
-  // DB myBatis
+  //lombok
+  implementation("org.projectlombok:lombok:${dependencyLombok}")
+
+  // DB MyBatis
   implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:${dependencyMybatis}")
   // DB MariaDB
   implementation("org.mariadb.jdbc:mariadb-java-client")
   // DB HikariCP
   implementation("com.zaxxer:HikariCP")
-  // DB h2
+  // DB H2
   runtimeOnly("com.h2database:h2")
-  // DB logging
+  // DB Logging
   implementation("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:${dependencyLog4jdbc}")
+  // DB Migration
+  implementation("org.flywaydb:flyway-core")
+
   // Java Simpliefied Encryption
-  implementation("com.github.ulisesbocchio:jasypt-spring-boot-starter")
+  implementation("com.github.ulisesbocchio:jasypt-spring-boot-starter:${dependencyJasypt}")
 
   // lucy xss
   implementation("com.navercorp.lucy:lucy-xss:${dependencyLucyXss}")
@@ -37,9 +61,6 @@ dependencies {
   //tomcat start
   runtimeOnly("org.springframework.boot:spring-boot-starter-tomcat")
 
-  implementation("org.projectlombok:lombok")
-
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:${dependencyMybatis}")
 }
-
