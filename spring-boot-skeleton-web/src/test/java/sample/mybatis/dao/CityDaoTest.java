@@ -24,6 +24,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 import sample.mybatis.domain.City;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * Tests for {@link CityDao}.
  * @author wonwoo
