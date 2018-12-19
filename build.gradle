@@ -13,18 +13,4 @@ subprojects {
   repositories {
     jcenter()
   }
-
-  task initSourceFolders {
-    sourceSets*.java.srcDirs*.each {
-      if( !it.exists() ) {
-        it.mkdirs()
-      }
-    }
-
-    sourceSets*.resources.srcDirs*.each {
-      if( !it.exists() ) {
-        it.mkdirs()
-      }
-    }
-  }
 }
