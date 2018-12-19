@@ -11,21 +11,26 @@ dependencies {
 
   // Spring Boot
   implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+  implementation("org.springframework.boot:spring-boot-starter-actuator")
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
   //lombok
   implementation("org.projectlombok:lombok:${dependencyLombok}")
 
-  // DB myBatis
+  // DB MyBatis
   implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:${dependencyMybatis}")
   // DB MariaDB
   implementation("org.mariadb.jdbc:mariadb-java-client")
   // DB HikariCP
   implementation("com.zaxxer:HikariCP")
-  // DB h2
+  // DB H2
   runtimeOnly("com.h2database:h2")
-  // DB logging
+  // DB Logging
   implementation("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:${dependencyLog4jdbc}")
+  // DB Migration
+  implementation("org.flywaydb:flyway-core")
+
   // Java Simpliefied Encryption
   implementation("com.github.ulisesbocchio:jasypt-spring-boot-starter:${dependencyJasypt}")
 
