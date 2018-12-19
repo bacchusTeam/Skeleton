@@ -64,6 +64,18 @@
         </encoder>
     </appender>
 
+    <appender name="FLYWAY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/FLYWAY.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/%d{yyMM}/%d{dd}/FLYWAY-%i.log</fileNamePattern>
+            <maxFileSize>128MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
     <!--
     <logger name="jdbc.sqlonly" level="TRACE" additivity="false"/>
     <logger name="jdbc.audit" level="TRACE" additivity="false"/>
@@ -76,12 +88,16 @@
         <appender-ref ref="JDBC"/>
     </logger>
 
-    <logger name="org.springframework.boot" level="TRACE" additivity="false">
-        <appender-ref ref="SPRING"/>
+    <logger name="org.springframework" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
     </logger>
 
     <logger name="com.zaxxer.hikari" level="TRACE" additivity="false">
         <appender-ref ref="HIKARI"/>
+    </logger>
+
+    <logger name="org.flywaydb" level="DEBUG" additivity="false">
+        <appender-ref ref="FLYWAY"/>
     </logger>
 
     <logger name="jdbc.sqltiming" level="TRACE" additivity="false">
@@ -92,7 +108,7 @@
         <appender-ref ref="SAMPLE"/>
     </logger>
 
-    <root level="INFO">
+    <root level="WARN">
         <appender-ref ref="CONSOLE"/>
     </root>
 
