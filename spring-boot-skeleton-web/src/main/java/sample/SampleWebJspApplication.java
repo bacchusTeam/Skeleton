@@ -32,9 +32,4 @@ public class SampleWebJspApplication extends SpringBootServletInitializer {
     log.info("after");
   }
 
-//  @Override
-//  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//    return application.sources(SampleWebJspApplication.class);
-//  }
-
 }
