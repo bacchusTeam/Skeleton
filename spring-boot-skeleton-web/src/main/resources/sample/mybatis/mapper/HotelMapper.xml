@@ -23,4 +23,29 @@
     <select id="selectByCityId" resultType="Hotel">
         select * from hotel where city = #{id}
     </select>
+
+    <insert id="insertHotel" parameterType="Hotel">
+		insert into hotel(
+			city,
+			name,
+			address,
+			zip
+		) values (
+			#{city},
+			#{name},
+			#{address},
+			#{zip}
+		);
+    </insert>
+
+    <update id="updatetHotel" parameterType="Hotel">
+		update hotel set
+		city = #{city}
+		name = #{name}
+		address = #{address}
+		zip = #{zip}
+		where id = #{id}
+    </update>
+
+
 </mapper>

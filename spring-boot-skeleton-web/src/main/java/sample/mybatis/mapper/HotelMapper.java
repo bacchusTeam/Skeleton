@@ -17,6 +17,7 @@ package sample.mybatis.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import sample.mybatis.domain.City;
 import sample.mybatis.domain.Hotel;
 
 /**
@@ -25,6 +26,11 @@ import sample.mybatis.domain.Hotel;
 @Mapper
 public interface HotelMapper {
 
-	Hotel selectByCityId(int city_id);
+	Hotel selectByCityId(int cityId);
 
+	void insertHotel(Hotel hotel);
+
+	void updateHotel(Hotel hotel);
+
+//	void deleteHotel(int id);
 }
