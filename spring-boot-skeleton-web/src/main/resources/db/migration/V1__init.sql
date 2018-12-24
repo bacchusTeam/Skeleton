@@ -5,3 +5,14 @@ CREATE TABLE PERSON (
 );
 
 create sequence person_sequence start with 1 increment by 1;
+
+create table users (
+  username varchar(256),
+  password varchar(256),
+  enabled boolean
+);
+
+create table authorities (
+  username varchar(256),
+  authority varchar(256)
+);

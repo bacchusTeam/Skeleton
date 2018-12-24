@@ -34,10 +34,10 @@ spring:
   devtools:
     restart:
       enabled: true
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/jsp/
+#      suffix: .jsp
   h2:
     console:
       enabled: true
@@ -46,6 +46,11 @@ spring:
     hibernate:
       ddl-auto: validate
     open-in-view: true
+  security:
+
+    user:
+      name: user
+      password: password
 
 management:
   endpoints:
