@@ -30,17 +30,17 @@ import sample.mybatis.mapper.HotelMapper;
 
 @Slf4j
 @Controller
-public class WelcomeController {
+public class IndexController {
 
   @Value("${application.message:Hello World}")
   private String message = "Hello World";
 
   @GetMapping("/")
-  public String welcome(Map<String, Object> model) {
+  public String home(Map<String, Object> model) {
     model.put("time", new Date());
     model.put("message", this.message);
     log.info("welcome");
-    return "welcome";
+    return "home";
   }
 
   @RequestMapping("/foo")
