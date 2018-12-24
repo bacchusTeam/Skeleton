@@ -31,6 +31,11 @@ import javax.persistence.SequenceGenerator;
 @ToString
 public class Person {
 
+  /**
+   * @TODO
+   * flyway 로 데이터 미리 입력된 상태에서
+   * auto_increment 에 따른 값 가지고 오기 안됨 확인 해보기
+   */
   @Id
   @SequenceGenerator(name = "person_generator", sequenceName = "person_sequence", allocationSize = 1)
   @GeneratedValue(generator = "person_generator")
