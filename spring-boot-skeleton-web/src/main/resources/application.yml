@@ -31,6 +31,8 @@ spring:
         cache-server-configuration: "true"
         elide-set-auto-commits: "true"
         maintain-time-stats: "false"
+  thymeleaf:
+    cache: false
   devtools:
     restart:
       enabled: true
