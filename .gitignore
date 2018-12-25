@@ -26,7 +26,6 @@ hs_err_pid*
 ### Eclipse template
 
 .metadata
-bin/
 tmp/
 *.tmp
 *.bak
@@ -91,6 +90,7 @@ local.properties
 .gradle/
 
 # build
+bin/
 build/
 out/
 target/

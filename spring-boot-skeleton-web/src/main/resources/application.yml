@@ -56,9 +56,6 @@ management:
       exposure:
         include: "*"
 
-application:
-  message: Hello Phil
-
 jasypt:
   encryptor:
     password: security-key-181218

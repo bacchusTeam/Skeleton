@@ -1,0 +1,26 @@
+<html lang="ko" xml:lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:fragment="header-css">
+    <link media='screen' rel='stylesheet' th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+  </div>
+</head>
+
+<body>
+<div th:fragment="header">
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" th:href="@{/}">TOP</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a th:href="@{/}">Home</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+</body>
+</html>

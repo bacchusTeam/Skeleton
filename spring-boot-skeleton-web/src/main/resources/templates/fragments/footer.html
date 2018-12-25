@@ -1,0 +1,28 @@
+<html lang="ko" xml:lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8"/>
+  <title></title>
+</head>
+<body>
+
+<div th:fragment="footer">
+  <div class="container">
+    <footer>
+      &copy; 2018 https://github.com/bacchusTeam
+      <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                Roles: <span sec:authentication="principal.authorities"></span> |
+                <a th:href="@{/logout}">Sign Out</a>
+            </span>
+
+      <script th:src="@{/webjars/jquery/jquery.min.js}" type="text/javascript"></script>
+      <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>
