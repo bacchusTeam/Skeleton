@@ -1,3 +1,5 @@
+debug: true
+
 spring:
   application:
     name: spring-boot-skeleton-web
@@ -49,6 +51,9 @@ spring:
     hibernate:
       ddl-auto: validate
     open-in-view: true
+  output:
+    ansi:
+      enabled: always
 
 management:
   endpoints:
@@ -65,10 +70,12 @@ mybatis:
 
 logging:
   path: ./log
-  pattern:
-    console: '%-24.24d [%5p] %50.50C (%file:%line\) - %m%n'
-    file: '%-24.24d [%5p] %50.50C (%file:%line\) - %m%n'
+#  pattern:
+#    console: '%-24.24d [%5p] %50.50C (%file:%line\) - %m%n'
+#    file: '%-24.24d [%5p] %50.50C (%file:%line\) - %m%n'
   level:
-    sample:
-      jsp: ERROR
-      mybatis: WARN
+    sample.jsp: ERROR
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+    com.zaxxer.hikari: ERROR
+
