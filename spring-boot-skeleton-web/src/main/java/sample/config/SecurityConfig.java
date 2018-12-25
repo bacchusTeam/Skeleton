@@ -45,6 +45,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.headers().frameOptions().sameOrigin();
   }
 
+  /**
+   * spring security 다양한 예제들 나중에 참조
+   * https://www.programcreek.com/java-api-examples/index.php?api=org.springframework.security.provisioning.JdbcUserDetailsManager
+   */
   @Bean
   public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource, AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
     JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
