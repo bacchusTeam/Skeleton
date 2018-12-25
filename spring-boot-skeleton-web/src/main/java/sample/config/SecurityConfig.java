@@ -2,11 +2,19 @@ package sample.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -38,9 +46,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   @Bean
-  public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
+  public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource, AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
     JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
     jdbcUserDetailsManager.setDataSource(dataSource);
+    PasswordEncoder encoder = new BCryptPasswordEncoder();
+    authenticationManagerBuilder.userDetailsService(jdbcUserDetailsManager).passwordEncoder(encoder);
+
+    /**
+     * //root 계정이 없을경우
+     *     if(!jdbcUserDetailsManager.userExists("root")) {
+     *       List<GrantedAuthority> authorities = new ArrayList<>();
+     *       //ROLE_ADMIN 권한 추가
+     *       authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+     *       //root/qwe123 계정으로 테스트 계정 생성
+     *       User userDetails = new User("root", encoder.encode("qwe123"), authorities);
+     *       jdbcUserDetailsManager.createUser(userDetails);
+     *     }
+     */
+
     return jdbcUserDetailsManager;
   }
 
