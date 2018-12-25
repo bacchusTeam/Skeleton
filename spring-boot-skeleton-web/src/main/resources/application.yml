@@ -32,6 +32,7 @@ spring:
         elide-set-auto-commits: "true"
         maintain-time-stats: "false"
   thymeleaf:
+    #https://docs.spring.io/spring-boot/docs/current/reference/html/howto-hotswapping.html
     cache: false
   devtools:
     restart:
@@ -48,11 +49,6 @@ spring:
     hibernate:
       ddl-auto: validate
     open-in-view: true
-  security:
-
-    user:
-      name: user
-      password: password
 
 management:
   endpoints:
