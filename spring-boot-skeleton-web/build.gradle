@@ -64,7 +64,6 @@ dependencies {
 
   implementation("org.webjars:webjars-locator:${dependencyWebJarsLocator}")
   implementation("org.webjars:bootstrap:${dependencyBootstrap}")
-  implementation("org.webjars:jquery:${dependencyJquery}")
 
   //tomcat start
   runtimeOnly("org.springframework.boot:spring-boot-starter-tomcat")
