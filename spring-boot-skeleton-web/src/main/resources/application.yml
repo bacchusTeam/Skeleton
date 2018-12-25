@@ -67,3 +67,8 @@ logging:
   path: ./log
   pattern:
     console: '%-24.24d [%5p] %50.50C (%file:%line\) - %m%n'
+    file: '%-24.24d [%5p] %50.50C (%file:%line\) - %m%n'
+  level:
+    sample:
+      jsp: ERROR
+      mybatis: WARN

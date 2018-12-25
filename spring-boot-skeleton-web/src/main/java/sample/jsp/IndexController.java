@@ -37,9 +37,9 @@ public class IndexController {
 
   @GetMapping("/")
   public String home(Map<String, Object> model) {
+    log.info("welcome");
     model.put("time", new Date());
     model.put("message", this.message);
-    log.info("welcome");
     return "home";
   }
 
