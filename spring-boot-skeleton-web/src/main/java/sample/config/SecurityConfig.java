@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,15 +22,14 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http
+  protected void configure(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity
         .csrf().disable()// csrf 사용 중지 (https://developer.mozilla.org/ko/docs/Web/Security/Same-origin_policy#Cross-origin_%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_%EC%A0%91%EA%B7%BC)
         .headers().frameOptions().sameOrigin().and()//clickjacking 동일 사이트 에서는 사용하기(https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/X-Frame-Options)
         .authorizeRequests()
-          .antMatchers("/", "/home", "/webjars/**", "/script/**", "/css/**").permitAll()
           .antMatchers("/admin/**").hasRole("ADMIN")
           .antMatchers("/user/**").hasRole("USER")
-          .anyRequest().authenticated()
+          .anyRequest().permitAll()
           .and()
         .formLogin()
           .loginPage("/login")
@@ -39,9 +40,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           .permitAll();
   }
 
+  @Override
+  public void configure(WebSecurity webSecurity) throws Exception {
+    webSecurity.ignoring()
+            .antMatchers("/webjars/**")
+            .antMatchers("/resources/**")
+            .antMatchers("/script/**")
+            .antMatchers("/css/**")
+            .antMatchers("/favicon.ico")
+    ;
+  }
+
   /**
    * spring security 다양한 예제들 나중에 참조
+   * https://github.com/spring-projects/spring-boot/blob/master/spring-boot-samples/spring-boot-sample-web-secure-jdbc/src/main/java/sample/web/secure/jdbc/SampleWebSecureJdbcApplication.java
    * https://www.programcreek.com/java-api-examples/index.php?api=org.springframework.security.provisioning.JdbcUserDetailsManager
+   * https://www.javainuse.com/spring/boot_security_jdbc_authentication_program
    */
   @Bean
   public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) throws Exception {
@@ -59,16 +73,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }};
 
     /*
-     //root 계정이 없을경우
-     if(!jdbcUserDetailsManager.userExists("root")) {
-       List<GrantedAuthority> authorities = new ArrayList<>();
-       //ROLE_ADMIN 권한 추가
-       authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-       //root:password 계정으로 테스트 계정 생성
-       User userDetails = new User("root", encoder.encode("password"), authorities);
-       jdbcUserDetailsManager.createUser(userDetails);
-     }
-     */
+    //root 계정이 없을경우
+    if(!jdbcUserDetailsManager.userExists("root")) {
+     List<GrantedAuthority> authorities = new ArrayList<>();
+     //ROLE_ADMIN 권한 추가
+     authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+     //root:password 계정으로 테스트 계정 생성
+     User userDetails = new User("root", encoder.encode("password"), authorities);
+     jdbcUserDetailsManager.createUser(userDetails);
+    }
+    */
     return jdbcUserDetailsManager;
   }
 }
