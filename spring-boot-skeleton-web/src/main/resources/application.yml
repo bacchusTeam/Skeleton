@@ -78,4 +78,8 @@ logging:
     org.springframework.web: ERROR
     org.hibernate: ERROR
     com.zaxxer.hikari: ERROR
-
+server:
+  ssl:
+    key-store: classpath:zzizily.jks
+    key-store-password: qwe123
+    key-password: qwe123
