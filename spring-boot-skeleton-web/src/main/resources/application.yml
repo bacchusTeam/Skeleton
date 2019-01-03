@@ -84,3 +84,7 @@ logging:
 server:
   http2:
     enabled: true
+  ssl:
+    key-store: classpath:zzizily.jks
+    key-store-password: qwe123
+    key-password: qwe123
