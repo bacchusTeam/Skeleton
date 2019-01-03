@@ -5,10 +5,11 @@ spring:
     name: spring-boot-skeleton-web
   datasource:
     platform: all
-#    schema
-#    1. h2 일때는 동작함 하지만 mariadb 일 때는 동작 안함
-#    2. flyway 사용시에는 동시 사용불가능
-#    schema: classpath:import.sql
+#    schema, data
+#    h2 일때는 동작함 하지만 mariadb 일 때는 동작 안함
+#    flyway 사용시에는 동시 사용 불가
+#    schema: classpath:schema.sql
+#    data: classpath:data.sql
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       connection-timeout: 10000
@@ -39,6 +40,7 @@ spring:
   devtools:
     restart:
       enabled: true
+#  mvc jsp 사용시
 #  mvc:
 #    view:
 #      prefix: /WEB-INF/jsp/
@@ -79,3 +81,6 @@ logging:
     org.hibernate: ERROR
     com.zaxxer.hikari: ERROR
 
+server:
+  http2:
+    enabled: true
