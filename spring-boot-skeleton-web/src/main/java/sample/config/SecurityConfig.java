@@ -33,12 +33,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           .anyRequest().permitAll()
           .and()
         .formLogin()
-          .loginPage("/login")
+//          .loginPage("/login")
           .failureUrl("/login?error")
           .permitAll()
           .and()
         .logout()
-          .permitAll();
+          .permitAll()
+          .and()
+        .sessionManagement()
+          .maximumSessions(1) //동시 로그인 1명 만 가능
+//            .maxSessionsPreventsLogin 하지 않으면 기존 로그인 세션을 만료
+//            .maxSessionsPreventsLogin(false) //기존 로그인 세션을 만료 기본값
+//            .maxSessionsPreventsLogin(true) //새로 로그인 하는것을 막음;
+          .and()
+    ;
   }
 
   @Override
