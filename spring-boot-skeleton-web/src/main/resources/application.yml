@@ -81,8 +81,8 @@ logging:
 server:
   ssl:
     key-store: classpath:zzizily.jks
-    key-store-password: qwe123
-    key-password: qwe123
+    key-store-password: ${server_ssl_key-store-password}
+    key-password: ${server_ssl_key-password}
   http2:
     enabled: true
   port: 8443
