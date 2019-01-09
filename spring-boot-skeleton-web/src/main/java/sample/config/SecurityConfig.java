@@ -45,7 +45,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //            .maxSessionsPreventsLogin 하지 않으면 기존 로그인 세션을 만료
 //            .maxSessionsPreventsLogin(false) //기존 로그인 세션을 만료 기본값
 //            .maxSessionsPreventsLogin(true) //새로 로그인 하는것을 막음;
-          .and()
     ;
   }
 
