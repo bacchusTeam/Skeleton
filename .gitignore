@@ -89,6 +89,9 @@ local.properties
 # gradle
 .gradle/
 
+# vscode
+.vscode/
+
 # build
 bin/
 build/

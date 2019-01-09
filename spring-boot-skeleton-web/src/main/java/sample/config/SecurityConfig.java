@@ -33,12 +33,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           .anyRequest().permitAll()
           .and()
         .formLogin()
-          .loginPage("/login")
+//          .loginPage("/login") // spring 기본 로그인 form 사용
           .failureUrl("/login?error")
           .permitAll()
           .and()
         .logout()
-          .permitAll();
+          .permitAll()
+          .and()
+        .sessionManagement()
+          .maximumSessions(1) // 동시 로그인 사용자 1명
+          .maxSessionsPreventsLogin(false) // false 기존 로그인 만료, true 하면 신규 로그인 막음
+        ;
   }
 
   @Override

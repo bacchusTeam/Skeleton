@@ -29,13 +29,16 @@ task initSourceFolders {
 dependencies {
 
   // Spring Boot
-  implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springframework.boot:spring-boot-starter-web") {
+    exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+  }
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
   implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
   implementation("org.springframework.boot:spring-boot-starter-security")
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
+  runtimeOnly("org.springframework.boot:spring-boot-starter-undertow")
 
 
   //lombok
@@ -63,15 +66,12 @@ dependencies {
   implementation("com.navercorp.lucy:lucy-xss:${dependencyLucyXss}")
   implementation("com.navercorp.lucy:lucy-xss-servlet:${dependencyLucyXssServlet}")
 
-  //jsp enable
+  //jstl,servlet
   implementation("javax.servlet:jstl")
-  runtimeOnly("org.apache.tomcat.embed:tomcat-embed-jasper")
+  implementation("javax.servlet:javax.servlet-api")
 
   implementation("org.webjars:webjars-locator:${dependencyWebJarsLocator}")
   implementation("org.webjars:bootstrap:${dependencyBootstrap}")
-
-  //tomcat start
-  runtimeOnly("org.springframework.boot:spring-boot-starter-tomcat")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.security:spring-security-test")

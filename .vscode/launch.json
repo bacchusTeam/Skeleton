@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-SampleWebJspApplication<spring-boot-skeleton-web>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "sample.SampleWebJspApplication",
+      "projectName": "spring-boot-skeleton-web",
+      "args": ""
+    }
+  ]
+}
