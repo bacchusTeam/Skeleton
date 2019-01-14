@@ -1,5 +1,3 @@
-debug: true
-
 spring:
   application:
     name: spring-boot-skeleton-web
@@ -49,20 +47,18 @@ spring:
       path: /h2-console
   jpa:
     hibernate:
-      ddl-auto: update # JPA Entity 와 DB 다르면 update
+      ddl-auto: validate # JPA Entity 와 DB 검증 다르면 실행 안됨
     open-in-view: true
     properties:
       hibernate:
         jdbc:
           lob:
-            non_contextual_creation=true:
-    generate-ddl: true # JPA Entity 자동 변경 켜기
+            non_contextual_creation: true
+    generate-ddl: false # JPA Entity 자동 변경 끄기
     show-sql: true
   output:
     ansi:
       enabled: always
-
-
 
 management:
   endpoints:
