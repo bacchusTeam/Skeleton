@@ -1,8 +1,10 @@
 package sample.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -14,6 +16,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import javax.sql.DataSource;
@@ -21,6 +25,12 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+  private DataSource dataSource;
+
+  public SecurityConfig(@Qualifier("dataSource") DataSource dataSource) {
+    this.dataSource = dataSource;
+  }
 
   @Override
   protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -59,6 +69,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     ;
   }
 
+  @Bean
+  @Override
+  public AuthenticationManager authenticationManagerBean () throws Exception{
+    return super.authenticationManagerBean();
+  }
+
+  @Bean
+  public TokenStore tokenStore() {
+    return new JdbcTokenStore(dataSource);
+  }
+
   /**
    * spring security 다양한 예제들 나중에 참조
    * https://github.com/spring-projects/spring-boot/blob/master/spring-boot-samples/spring-boot-sample-web-secure-jdbc/src/main/java/sample/web/secure/jdbc/SampleWebSecureJdbcApplication.java
@@ -66,19 +87,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
    * https://www.javainuse.com/spring/boot_security_jdbc_authentication_program
    */
   @Bean
-  public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) throws Exception {
-    JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager() {{
-      setDataSource(dataSource);
-      /*
-      //spring 의 기본 table 과 다를 경우 직접 sql 작성해서 사용 가능
-      setGroupAuthoritiesByUsernameQuery("");
-      setUsersByUsernameQuery("");
-      setAuthoritiesByUsernameQuery("");
-      setCreateUserSql("");
-      setChangePasswordSql("");
-      setDeleteUserSql("");
-      */
-    }};
+  public JdbcUserDetailsManager jdbcUserDetailsManager() throws Exception {
+    JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
+    jdbcUserDetailsManager.setDataSource(dataSource);
+    /* spring 의 기본 table 과 다를 경우 직접 sql 작성해서 사용 가능
+    jdbcUserDetailsManager.setGroupAuthoritiesByUsernameQuery("");
+    jdbcUserDetailsManager.setUsersByUsernameQuery("");
+    jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("");
+    jdbcUserDetailsManager.setCreateUserSql("");
+    jdbcUserDetailsManager.setChangePasswordSql("");
+    jdbcUserDetailsManager.setDeleteUserSql("");
+    */
 
     /*
     //root 계정이 없을경우
