@@ -75,11 +75,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     return super.authenticationManagerBean();
   }
 
-  @Bean
-  public TokenStore tokenStore() {
-    return new JdbcTokenStore(dataSource);
-  }
-
   /**
    * spring security 다양한 예제들 나중에 참조
    * https://github.com/spring-projects/spring-boot/blob/master/spring-boot-samples/spring-boot-sample-web-secure-jdbc/src/main/java/sample/web/secure/jdbc/SampleWebSecureJdbcApplication.java
@@ -112,4 +107,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     */
     return jdbcUserDetailsManager;
   }
+
+
 }
